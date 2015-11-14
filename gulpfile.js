@@ -4,21 +4,23 @@ var sass = require('gulp-sass')
 var less = require('gulp-less')
 var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
+var react = require('gulp-react')
+var jsx = require('gulp-jsx')
 var livereload = require('gulp-livereload')
 var server = require('gulp-server-livereload')
 
 var paths = {
-	"js": ["src/scripts/**/*.js"],
+	"js": ["src/scripts/**/*.js", "src/scripts/**/*.jsx"],
 	"sass": ["src/scss/**/*.scss"]
 }
 
-gulp.task('es6', () => {
+gulp.task('scripts', () => {
 	return gulp.src(paths.js)
+		.pipe(react())
 		.pipe(babel({
 			presets: ['es2015']
 		}))
 		.pipe(uglify())
-		.pipe(concat('all.js'))
 		.pipe(gulp.dest('builds/scripts'))
 })
 
@@ -31,7 +33,7 @@ gulp.task('sass', () => {
 })
 
 gulp.task('watch', () => {
-	gulp.watch(paths.js, ['es6'])
+	gulp.watch(paths.js, ['scripts'])
 	gulp.watch(paths.sass, ['sass'])
 })
 
