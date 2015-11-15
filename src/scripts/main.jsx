@@ -1,7 +1,8 @@
-var HelloMessage = React.createClass({
+var MainBar = React.createClass({
   render: function() {
-    return <div>Hello {this.props.name}</div>;
+    return <div id="main-bar">
+    </div>
   }
-});
+})
 
-ReactDOM.render(<HelloMessage name="herman" />, document.getElementById('main'));
+ReactDOM.render( <MainBar />, document.getElementById('debug-bar'))
